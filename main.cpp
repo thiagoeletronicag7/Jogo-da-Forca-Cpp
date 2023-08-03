@@ -1,31 +1,30 @@
 #include <iostream>
 #include <cstring>
+#include <unistd.h>
 
 using namespace std;
 
 int main ()
 {
-    setlocale(LC_ALL, "pt_BR.UTF-8"); //para aceitar acentos da língua portuguesa
-
-    cout << "Este é o Jogo da Forca Interativo" << endl;
-    cout << "Para instruções de uso, leia o arquivo README.MD que se encontra na pasta do jogo!" << endl;
+    cout << "Este eh o Jogo da Forca Interativo" << endl;
+    cout << "Para instrucoes de uso, leia o arquivo README.MD que se encontra na pasta do jogo!" << endl;
 
     //No futuro, encontrar uma forma de retirar as palavras desse arquivo e colocar em outro
     char palavra1[] = "paralelepipedo";
     char palavra2[] = "otorrinolaringologista";
-    char palavra3[] = "pneumoultramicroscopicossilicovulcanoconiótico";
+    char palavra3[] = "pneumoultramicroscopicossilicovulcanoconiotico";
     char palavra4[] = "ampulheta";
     char palavra5[] = "jazz";
 
-    cout << "Digite um único número entre 1 e 5:\n";
+    cout << "Digite um unico numero entre 1 e 5:\n";//seletor da palavra do jogo
     int seletor = 0;
     while (seletor > 5 or seletor < 1)
     {
         cin >> seletor;
-        if(seletor > 5 or seletor < 1) cout << "Valor inválido, digite um número entre 1 e 5:\n";
+        if(seletor > 5 or seletor < 1) cout << "Valor invalido, digite um numero entre 1 e 5:\n";
     }
 
-    char desafio[47];
+    char desafio[47]; //variável para armazenar a palavra do jogo
 
     switch (seletor) //passa a palavra escolhida para uma nova variável
     {
@@ -49,21 +48,21 @@ int main ()
     int tamanhoDaPalavra = strlen(desafio); //retorna o tamanho da palavra para a variável 
     cout << "Sua palavra tem " << tamanhoDaPalavra << " letras" << endl;
 
-    for (int i = 0; i < tamanhoDaPalavra; i++) cout << "__|";
+    for (int i = 0; i < tamanhoDaPalavra; i++) cout << "__|"; //Para mostrar para o usuário a quantidade de letras
 
     cout << endl;
 
     int vida = 5; //Quantidade de vidas do jogo
     char tentativa; //armazenará o valor digitado pelo usuário
-    char saida[47];
+    char saida[47]; //variável que será utilizada para printar a cada tentativa do usuário
 
-    for (int i = 0; i < tamanhoDaPalavra; i++)
+    for (int i = 0; i < tamanhoDaPalavra; i++) //armazena um valor vazio a cada espaço do array
     {
         saida[i] = ' ';
     }
     
-    int acerto = 0;
-    int comparaPalavras;
+    int acerto = 0; //variável responsável em verificar se o usuário acertou alguma letra
+    int comparaPalavras; //variável responsável em verificar se o usuário terminou a palavra
     
     while (vida)
     {
@@ -85,10 +84,10 @@ int main ()
         }
 
         cout << endl;
-        if (acerto == 0) vida--;
-        else acerto = 0;
+        if (acerto == 0) vida--; //se o usuário não acertou nenhuma, perde uma vida
+        else acerto = 0; //se acertou alguma, reseta a variável de acerto e vai para próxima tentativa
 
-        switch (vida)
+        switch (vida) //para printar o boneco dos erros do jogo da forca
         {
         case 4:
             cout << "  ___   " << endl;
@@ -118,13 +117,16 @@ int main ()
             break;
         }
 
-        comparaPalavras = strcmp(desafio, saida);
+        sleep(0.5);
+
+        comparaPalavras = strcmp(desafio, saida); //verifica se o usuário ganhou o jogo
         if (comparaPalavras == 0)
         {
-            cout << "\n\nParabéns você salvou uma vida!" << endl;
-            cout << "Seu prêmio é uma frase especial............." << endl;
-            cout << "Vencer não prova seus limites, tentar até que a vitória seja a única opção sim." << endl;
+            cout << "\n\nParabens voce salvou uma vida!" << endl;
+            cout << "Seu premio eh uma frase especial............." << endl;
+            cout << "Vencer nao prova seus limites, tentar ate que a vitoria seja a unica opcao sim." << endl;
             cout << "Obrigado por jogar!!\nThiago Valentim - TunelessBat" << endl;
+            cin.get();
             return 0;
         }
         
