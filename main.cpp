@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <unistd.h>
+#include <cstdlib>
 
 using namespace std;
 
@@ -78,7 +79,7 @@ int main ()
                 saida[i] = tentativa;
             } else if(saida[i] == ' ')
             {
-                saida[i] = '_';           
+                saida[i] = '_';        
             }
             cout << saida[i] << "_|";         
         }
