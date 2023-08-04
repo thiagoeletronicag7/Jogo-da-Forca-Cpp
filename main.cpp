@@ -5,6 +5,9 @@
 
 using namespace std;
 
+bool venceu(char palavra_forca[], char tentativa_jogador[]);
+bool perdeu(int vidas);
+
 int main ()
 {
     cout << "Este eh o Jogo da Forca Interativo" << endl;
@@ -88,7 +91,49 @@ int main ()
         if (acerto == 0) vida--; //se o usuário não acertou nenhuma, perde uma vida
         else acerto = 0; //se acertou alguma, reseta a variável de acerto e vai para próxima tentativa
 
-        switch (vida) //para printar o boneco dos erros do jogo da forca
+        if(perdeu(vida)) //testa se o jogador perdeu o jogo e se errou alguma tentativa
+        {
+            cout << "GAME OVER!\nThiago Valentim - TunelessBat";
+            system("pause");
+            return 0;
+        }
+
+        if(venceu(desafio, saida)) return 0; //testa se o jogador venceu o jogo
+        
+    }
+
+    cout << "GAME OVER!\nThiago Valentim - TunelessBat\n\n";
+    system("pause");
+
+
+
+    return 0;
+}
+
+//verifica se o jogador terminou a palavra
+bool venceu(char palavra_forca[], char tentativa_jogador[])
+{
+    int comparaPalavras = strcmp(palavra_forca, tentativa_jogador);
+    bool vitoria = false;
+    if (comparaPalavras == 0)
+        {
+            cout << "\n\nParabens voce salvou uma vida!" << endl;
+            cout << "Seu premio eh uma frase especial............." << endl;
+            cout << "Vencer nao prova seus limites, tentar ate que a vitoria seja a unica opcao sim." << endl;
+            cout << "Obrigado por jogar!!\nThiago Valentim - TunelessBat" << endl;
+            system("pause");
+
+            vitoria = true;
+        }
+
+        return vitoria;
+
+}
+
+bool perdeu(int vidas)
+{
+    bool derrota = false;
+    switch (vidas) //para printar o boneco dos erros do jogo da forca
         {
         case 4:
             cout << "  ___   " << endl;
@@ -114,35 +159,18 @@ int main ()
             cout << "-------" << endl;
             cout << "  /" << endl;
             cout << " /" << endl;
+            break;
+        case 0:
+            cout << "  ___   " << endl;
+            cout << " (° °)" << endl;
+            cout << "   |" << endl;
+            cout << "-------" << endl;
+            cout << "  / \\" << endl;
+            cout << " /   \\" << endl;
+            derrota = true;
         default:
             break;
         }
 
-        sleep(0.5);
-
-        comparaPalavras = strcmp(desafio, saida); //verifica se o usuário ganhou o jogo
-        if (comparaPalavras == 0)
-        {
-            cout << "\n\nParabens voce salvou uma vida!" << endl;
-            cout << "Seu premio eh uma frase especial............." << endl;
-            cout << "Vencer nao prova seus limites, tentar ate que a vitoria seja a unica opcao sim." << endl;
-            cout << "Obrigado por jogar!!\nThiago Valentim - TunelessBat" << endl;
-            cin.get();
-            return 0;
-        }
-        
-    }
-
-    cout << "  ___   " << endl;
-    cout << " (° °)" << endl;
-    cout << "   |" << endl;
-    cout << "-------" << endl;
-    cout << "  / \\" << endl;
-    cout << " /   \\" << endl;
-    cout << "GAME OVER!\nThiago Valentim - TunelessBat";
-
-
-
-
-    return 0;
+    return derrota;
 }
